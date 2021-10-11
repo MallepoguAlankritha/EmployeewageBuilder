@@ -2,8 +2,8 @@ package com.bridgelabz;
 
 import java.util.Random;
 
-public class Employeewagebuilder {
-	// Declaring a constant
+public class Employeewagebuilder implements IEmployeeWage{
+    // Declaring a constant
     public static final int IS_FULLTIME = 1;
     public static final int IS_PARTTIME = 2;
     private int numOfCompany = 0;
@@ -13,21 +13,18 @@ public class Employeewagebuilder {
         companyInfoArray = new CompanyInfo[6];
     }
 
-    private void addCompanyInfo(String companyName, int empRatePerHour, int noOfWorkingDays, int maxHoursPerMonth) {
+    public void addCompanyInfo(String companyName, int empRatePerHour, int noOfWorkingDays, int maxHoursPerMonth) {
         companyInfoArray[numOfCompany] = new CompanyInfo(companyName, empRatePerHour, noOfWorkingDays, maxHoursPerMonth);
         numOfCompany++;
     }
 
-    private void computeEmpWage() {
+    public void computeEmpWage() {
         for (int i = 0; i < numOfCompany; i++) {
-            companyInfoArray[i].setTotalEmpWage(this.computeWage(companyInfoArray[i]));
+            companyInfoArray[i].setTotalEmpWage(Employeewagebuilder.computeWage(companyInfoArray[i]));
             System.out.println(companyInfoArray[i]);
         }
     }
-
-    /*
-       We have used static method here so that we can directly call it inside main
-     */
+    
     public static int computeWage(CompanyInfo companyInfo) {
         // Declaring the variables
         int empHrs = 0;
@@ -61,12 +58,13 @@ public class Employeewagebuilder {
 
     public static void main(String[] args) {
         System.out.println("Welcome To Employee Wage Computation Program");
-        Employeewagebuilder employeeWageBuilder = new Employeewagebuilder();
-        employeeWageBuilder.addCompanyInfo("Infosys", 150, 2, 10);
-        employeeWageBuilder.addCompanyInfo("TCS" , 200, 3, 10);
-        employeeWageBuilder.addCompanyInfo("Accenture", 100, 4, 12);
-        employeeWageBuilder.addCompanyInfo("Jio", 180, 3, 15);
-        employeeWageBuilder.addCompanyInfo("Airtel", 160, 4, 14);
-        employeeWageBuilder.computeEmpWage();
+        IEmployeeWage employeewageBuilder = new Employeewagebuilder();
+        ((Employeewagebuilder) employeewageBuilder).addCompanyInfo("Infosys", 150, 2, 10);
+        ((Employeewagebuilder) employeewageBuilder).addCompanyInfo("TCS" , 200, 3, 10);
+        ((Employeewagebuilder) employeewageBuilder).addCompanyInfo("Accenture", 100, 4, 12);
+        ((Employeewagebuilder) employeewageBuilder).addCompanyInfo("Jio", 180, 3, 15);
+        ((Employeewagebuilder) employeewageBuilder).addCompanyInfo("Airtel", 160, 4, 14);
+        ((Employeewagebuilder) employeewageBuilder).computeEmpWage();
     }
 }
+	
