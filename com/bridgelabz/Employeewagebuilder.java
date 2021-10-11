@@ -7,12 +7,26 @@ public class Employeewagebuilder {
     public static final int IS_FULLTIME = 1;
     public static final int IS_PARTTIME = 2;
 
+    private final String companyName;
+    private final int empRatePerHour;
+    private final int noOfWorkingDays;
+    private final int maxHoursPerMonth;
+    private int totalEmpWage;
+
+   
+    public Employeewagebuilder(String companyName, int empRatePerHour, int noOfWorkingDays, int maxHoursPerMonth) {
+        this.companyName = companyName;
+        this.empRatePerHour = empRatePerHour;
+        this.noOfWorkingDays = noOfWorkingDays;
+        this.maxHoursPerMonth = maxHoursPerMonth;
+    }
+
   
-    public static int computeWage(String companyName, int empRatePerHour, int noOfWorkingDays, int maxHoursPerMonth) {
+
+    public void computeWage() {
         // Declaring the variables
         int empHrs = 0;
         int empWage = 0;
-        int totalEmpWage = 0;
         int totalEmpHrs = 0;
         int totalWorkingDays = 0;
         /*
@@ -38,14 +52,23 @@ public class Employeewagebuilder {
                                 ", Employee Wage : " + empWage );
         }
         totalEmpWage = totalEmpHrs * empRatePerHour;
-        System.out.println("Total Wages of an employee in " +companyName + " company is : " + totalEmpWage + "\n");
-        return totalEmpWage;
+    }
+
+    @Override
+    public String toString(){
+        return "Total Wages of an employee in " +companyName + " company is : " + totalEmpWage + "\n";
     }
 
     public static void main(String[] args) {
         System.out.println("Welcome To Employee Wage Computation Program");
-        computeWage("TCS" , 200, 3, 10) ;
-        computeWage("Accenture", 100, 4, 12);
-        computeWage("Infosys", 150, 2, 10);
+        Employeewagebuilder infosys = new Employeewagebuilder("Infosys", 150, 2, 10);
+        Employeewagebuilder tcs = new Employeewagebuilder("TCS" , 200, 3, 10);
+        Employeewagebuilder accenture = new Employeewagebuilder("Accenture", 100, 4, 12);
+        infosys.computeWage();
+        System.out.println(infosys);
+        tcs.computeWage();
+        System.out.println(tcs);
+        accenture.computeWage();
+        System.out.println(accenture);
     }
 }
